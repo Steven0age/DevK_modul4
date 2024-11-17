@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Übung Arrays</title>
+    <script>
+      let array = [3, 4, 5, 6, 7, 8];
+      function addElement() {
+        array.push(parseInt(document.getElementById("addInput").value));
+        console.log(array);
+      }
+
+      function removeByID() {
+        array.splice(document.getElementById("removeInputByID").value, 1);
+        console.log(array);
+      }
+
+      function removeByContent() {
+        let find = array.indexOf(
+          parseInt(document.getElementById("removeInputByContent").value)
+        );
+        find < 0
+          ? console.log("Content nicht vorhanden")
+          : array.splice(find, 1);
+        console.log(array);
+      }
+
+      function showArray() {
+        console.log(array);
+      }
+
+      function multiplyArray() {
+        console.log(array);
+        let result = array.map((value) => {
+          return value * 2;
+        });
+        array = result;
+        console.log(array);
+      }
+
+      function sumArray() {
+        console.log(array);
+        let result = array.reduce((a, b) => {
+          return a + b;
+        });
+        console.log(result);
+      }
+    </script>
+  </head>
+  <body>
+    <span>Inhalt einfügen:</span> <input id="addInput" type="number" />
+    <button onclick="addElement()">Einfügen</button>
+    <br />
+    <span>ID löschen:</span> <input id="removeInputByID" type="number" />
+    <button onclick="removeByID()">Löschen</button>
+    <br />
+    <span>Content löschen:</span>
+    <input id="removeInputByContent" type="number" />
+    <button onclick="removeByContent()">Löschen</button>
+    <br />
+    <button onclick="showArray()">Anzeigen</button>
+    <br />
+    <button onclick="multiplyArray()">Multiplizieren mit "2"</button>
+    <br />
+    <button onclick="sumArray()">Summe</button>
+  </body>
+</html>
