@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Übungs Objects</title>
+    <script>
+      const stundentDatabase = [];
+      const score = {
+        englisch: "",
+        german: "",
+        math: "",
+      };
+
+      const person = {
+        name: "",
+        lastname: "",
+        age: "",
+        class: "",
+        ClassResults: score,
+      };
+
+      function addStudent() {
+        const newStudent = person;
+        newStudent.name = document.getElementById("firstname").value;
+        console.log("Der Wert von newStudent.name lautet: ", newStudent.name);
+        newStudent.lastname = document.getElementById("lastname").value;
+        newStudent.age = document.getElementById("age").value;
+        newStudent.class = document.getElementById("class").value;
+        newStudent.ClassResults.englisch =
+          document.getElementById("english").value;
+        newStudent.ClassResults.german =
+          document.getElementById("german").value;
+        newStudent.ClassResults.math = document.getElementById("math").value;
+        stundentDatabase.push(newStudent);
+      }
+
+      function showStundentDatabase() {
+        console.log(newStudent);
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Schüler eintragen</h1>
+    <span>Vorname: </span><input id="firstname" /><br />
+    <span>Nachname: </span><input id="lastname" /><br />
+    <span>Alter: </span><input id="age" /><br />
+    <span>Klasse: </span><input id="class" /><br />
+    <span>Englisch: </span><input id="english" /><br />
+    <span>Deutsch: </span><input id="german" /><br />
+    <span>Mathe: </span><input id="math" /><br />
+    <button onclick="addStudent()">Erstellen</button>
+    <button onclick="showStundentDatabase()">Anzeigen</button>
+  </body>
+</html>
