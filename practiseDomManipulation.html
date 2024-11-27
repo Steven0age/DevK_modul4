@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .card {
+        background-color: lightgrey;
+        border: 1px;
+        border-style: solid;
+        margin-top: 8px;
+        margin-bottom: 8px;
+      }
+    </style>
+    <script>
+      function addStudent() {
+        const firstName = ["Hans", "Joachim", "Peter", "Michael"];
+        const surName = ["Meier", "Merte", "Micheslson", "Tolle"];
+        const age = [6, 7, 8, 9];
+
+        const randomFirstName = Math.floor(firstName.length * Math.random());
+        const randomSurName = Math.floor(surName.length * Math.random());
+        const randomAge = Math.floor(age.length * Math.random());
+
+        const newDiv = document.createElement("div");
+        newDiv.classList.add("card");
+        const element = document.getElementById("studentCards");
+        element.appendChild(newDiv);
+
+        const newFirstName = document.createElement("p");
+        const firstNameNode = document.createTextNode(
+          `Vorname: ${firstName[randomFirstName]}`
+        );
+
+        const newSurName = document.createElement("p");
+        const surNameNode = document.createTextNode(
+          `Nachname: ${surName[randomSurName]}`
+        );
+
+        const newAge = document.createElement("p");
+        const ageNode = document.createTextNode(`Alter: ${age[randomAge]}`);
+
+        newFirstName.appendChild(firstNameNode);
+        newSurName.appendChild(surNameNode);
+        newAge.appendChild(ageNode);
+
+        newDiv.append(newFirstName, newSurName, newAge);
+      }
+    </script>
+  </head>
+  <body>
+    <button onclick="addStudent()">ADD</button>
+    <div id="studentCards">
+      <div class="card">
+        <p>Vorname:</p>
+        <p>Nachname:</p>
+        <p>Alter:</p>
+      </div>
+    </div>
+  </body>
+</html>
