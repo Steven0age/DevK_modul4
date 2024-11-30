@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .student {
+        border: 1px solid black;
+      }
+    </style>
+    <script>
+      const vornamen = ["Jan", "Peter", "Ulrich"];
+      const nachnamen = ["Müller", "Meier", "Schuster"];
+      const alter = [7, 8, 9];
+      let students = [];
+
+      document.addEventListener("DOMContentLoaded", loadStudents);
+
+      function loadStudents() {
+        const loadStudents = localStorage.getItem("saveStudents");
+        const unJSONStudents = JSON.parse(loadStudents);
+        if (unJSONStudents !== null) {
+          students = unJSONStudents;
+        }
+        addStudentToDOM();
+      }
+
+      function saveStudents() {
+        const JSONStudents = JSON.stringify(students);
+        localStorage.setItem("saveStudents", JSONStudents);
+      }
+
+      function randomStudent() {
+        const randomVorname =
+          vornamen[Math.floor(Math.random() * vornamen.length)];
+        const randomNachname =
+          nachnamen[Math.floor(Math.random() * nachnamen.length)];
+        const randomAlter = alter[Math.floor(Math.random() * alter.length)];
+
+        const student = {
+          name: randomVorname,
+          nachname: randomNachname,
+          alter: randomAlter,
+          id: Math.random(),
+        };
+
+        students.push(student);
+
+        saveStudents();
+        clearDom();
+        addStudentToDOM();
+      }
+
+      function deleteStudent(deleteById) {
+        const remove = students.findIndex((search) => {
+          return search.id == deleteById;
+        });
+        students.splice(remove, 1);
+        saveStudents();
+        clearDom();
+        addStudentToDOM();
+      }
+
+      function addStudentToDOM() {
+        students.forEach((element) => {
+          const studentDiv = document.createElement("div");
+          studentDiv.classList.add("student");
+          studentDiv.id = element.id;
+          studentDiv.style.backgroundColor = "#ddd";
+
+          const vornameParagraph = document.createElement("p");
+          const nachnameParagraph = document.createElement("p");
+          const alterParagraph = document.createElement("p");
+
+          const vornamenText = document.createTextNode(
+            "Vorname: " + element.name
+          );
+          const nachnameText = document.createTextNode(
+            "Nachname: " + element.nachname
+          );
+          const agerText = document.createTextNode("Alter: " + element.alter);
+
+          vornameParagraph.appendChild(vornamenText);
+          nachnameParagraph.appendChild(nachnameText);
+          alterParagraph.appendChild(agerText);
+
+          studentDiv.appendChild(vornameParagraph);
+          studentDiv.appendChild(nachnameParagraph);
+          studentDiv.appendChild(alterParagraph);
+
+          const deleteButton = document.createElement("button");
+          const buttonText = document.createTextNode("Löschen");
+          deleteButton.appendChild(buttonText);
+          deleteButton.setAttribute("onclick", `deleteStudent(${element.id})`);
+          studentDiv.appendChild(deleteButton);
+
+          document.getElementById("wrapper").appendChild(studentDiv);
+        });
+      }
+
+      function clearDom() {
+        const clearDOM = document.getElementById("wrapper");
+        while (clearDOM.firstChild) {
+          clearDOM.firstChild.remove();
+        }
+      }
+    </script>
+  </head>
+
+  <body>
+    <button onclick="randomStudent()">ADD</button>
+    <h1>Students</h1>
+    <div id="wrapper"></div>
+  </body>
+</html>
