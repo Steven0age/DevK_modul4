@@ -100,10 +100,7 @@
       }
 
       function clearDom() {
-        const clearDOM = document.getElementById("wrapper");
-        while (clearDOM.firstChild) {
-          clearDOM.firstChild.remove();
-        }
+        document.getElementById("wrapper").replaceChildren();
       }
     </script>
   </head>
